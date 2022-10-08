@@ -1,0 +1,117 @@
+:root {
+  --font-mont-heavy: 'Mont-Heavy';
+  --font-mont-semiBold: 'Mont-SemiBold';
+
+  --font-nekst-black: 'Nekst-Black';
+
+  --font-gilroy-regular: 'Gilroy-Regular';
+  --font-gilroy-bold: 'Gilroy-Bold';
+}
+
+/* 
+  * Mont 
+*/
+
+@font-face {
+  font-family: var(--font-mont-heavy);
+  src: url('@/assets/fonts/mont/heavy/Mont-Heavy.eot');
+  src: local('Mont Heavy'), local('Mont-Heavy'),
+    url('@/assets/fonts/mont/heavy/Mont-Heavy.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/mont/heavy/Mont-Heavy.woff2') format('woff2'),
+    url('@/assets/fonts/mont/heavy/Mont-Heavy.woff') format('woff'),
+    url('@/assets/fonts/mont/heavy/Mont-Heavy.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+.font__mont__heavy {
+  font-family: var(--font-mont-heavy);
+}
+
+@font-face {
+  font-family: var(--font-mont-semiBold);
+  src: url('@/assets/fonts/mont/semiBold/Mont-SemiBold.eot');
+  src: local('Mont SemiBold'), local('Mont-SemiBold'),
+    url('@/assets/fonts/mont/semiBold/Mont-SemiBold.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/mont/semiBold/Mont-SemiBold.woff2') format('woff2'),
+    url('@/assets/fonts/mont/semiBold/Mont-SemiBold.woff') format('woff'),
+    url('@/assets/fonts/mont/semiBold/Mont-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+.font__mont__semiBold {
+  font-family: var(--font-mont-semiBold);
+}
+
+/* 
+  * Nekst 
+*/
+
+@font-face {
+  font-family: var(--font-nekst-black);
+  src: url('@/assets/fonts/nekst/black/Nekst-Black.eot');
+  src: local('Nekst'), local('Nekst-Black'),
+    url('@/assets/fonts/nekst/black/Nekst-Black.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/nekst/black/Nekst-Black.woff2') format('woff2'),
+    url('@/assets/fonts/nekst/black/Nekst-Black.woff') format('woff'),
+    url('@/assets/fonts/nekst/black/Nekst-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+.font__nekst__black {
+  font-family: var(--font-nekst-black);
+}
+
+/* 
+  * Gilroy 
+*/
+
+@font-face {
+  font-family: var(--font-gilroy-regular);
+  src: url('@/assets/fonts/gilroy/regular/Gilroy-Regular.eot');
+  src: local('Gilroy Regular'), local('Gilroy-Regular'),
+    url('@/assets/fonts/gilroy/regular/Gilroy-Regular.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/gilroy/regular/Gilroy-Regular.woff2') format('woff2'),
+    url('@/assets/fonts/gilroy/regular/Gilroy-Regular.woff') format('woff'),
+    url('@/assets/fonts/gilroy/regular/Gilroy-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font__gilroy__regular {
+  font-family: var(--font-gilroy-regular);
+}
+
+@font-face {
+  font-family: var(--font-gilroy-bold);
+  src: url('@/assets/fonts/gilroy/bold/Gilroy-Bold.eot');
+  src: local('Gilroy Bold'), local('Gilroy-Bold'),
+    url('@/assets/fonts/gilroy/bold/Gilroy-Bold.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/gilroy/bold/Gilroy-Bold.woff2') format('woff2'),
+    url('@/assets/fonts/gilroy/bold/Gilroy-Bold.woff') format('woff'),
+    url('@/assets/fonts/gilroy/bold/Gilroy-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+.font__gilroy__bold {
+  font-family: var(--font-gilroy-bold);
+}
+
+/* 
+  * Sizes
+*/
+
+.font__title {
+  font-size: 54px;
+}
+
+.font__text {
+  font-size: 16px;
+}
+
+.font__medium {
+  font-size: 30px;
+}

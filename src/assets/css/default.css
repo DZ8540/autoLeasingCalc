@@ -1,0 +1,55 @@
+* {
+  box-sizing: border-box;
+  outline: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+  outline: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
+}
+
+body,
+html {
+  overflow-x: hidden !important;
+}
+
+p,
+ul,
+body,
+h1, h2, h3 {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  -moz-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.container {
+  max-width: 1440px;
+  padding: 0 47px;
+}
