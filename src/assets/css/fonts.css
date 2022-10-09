@@ -1,19 +1,9 @@
-:root {
-  --font-mont-heavy: 'Mont-Heavy';
-  --font-mont-semiBold: 'Mont-SemiBold';
-
-  --font-nekst-black: 'Nekst-Black';
-
-  --font-gilroy-regular: 'Gilroy-Regular';
-  --font-gilroy-bold: 'Gilroy-Bold';
-}
-
 /* 
   * Mont 
 */
 
 @font-face {
-  font-family: var(--font-mont-heavy);
+  font-family: 'Mont-Heavy';
   src: url('@/assets/fonts/mont/heavy/Mont-Heavy.eot');
   src: local('Mont Heavy'), local('Mont-Heavy'),
     url('@/assets/fonts/mont/heavy/Mont-Heavy.eot?#iefix') format('embedded-opentype'),
@@ -25,11 +15,11 @@
 }
 
 .font__mont__heavy {
-  font-family: var(--font-mont-heavy);
+  font-family: 'Mont-Heavy';
 }
 
 @font-face {
-  font-family: var(--font-mont-semiBold);
+  font-family: 'Mont-SemiBold';
   src: url('@/assets/fonts/mont/semiBold/Mont-SemiBold.eot');
   src: local('Mont SemiBold'), local('Mont-SemiBold'),
     url('@/assets/fonts/mont/semiBold/Mont-SemiBold.eot?#iefix') format('embedded-opentype'),
@@ -41,7 +31,7 @@
 }
 
 .font__mont__semiBold {
-  font-family: var(--font-mont-semiBold);
+  font-family: 'Mont-SemiBold';
 }
 
 /* 
@@ -49,7 +39,7 @@
 */
 
 @font-face {
-  font-family: var(--font-nekst-black);
+  font-family: 'Nekst-Black';
   src: url('@/assets/fonts/nekst/black/Nekst-Black.eot');
   src: local('Nekst'), local('Nekst-Black'),
     url('@/assets/fonts/nekst/black/Nekst-Black.eot?#iefix') format('embedded-opentype'),
@@ -61,7 +51,7 @@
 }
 
 .font__nekst__black {
-  font-family: var(--font-nekst-black);
+  font-family: 'Nekst-Black';
 }
 
 /* 
@@ -69,7 +59,7 @@
 */
 
 @font-face {
-  font-family: var(--font-gilroy-regular);
+  font-family: 'Gilroy-Regular';
   src: url('@/assets/fonts/gilroy/regular/Gilroy-Regular.eot');
   src: local('Gilroy Regular'), local('Gilroy-Regular'),
     url('@/assets/fonts/gilroy/regular/Gilroy-Regular.eot?#iefix') format('embedded-opentype'),
@@ -81,11 +71,11 @@
 }
 
 .font__gilroy__regular {
-  font-family: var(--font-gilroy-regular);
+  font-family: 'Gilroy-Regular';
 }
 
 @font-face {
-  font-family: var(--font-gilroy-bold);
+  font-family: 'Gilroy-Bold';
   src: url('@/assets/fonts/gilroy/bold/Gilroy-Bold.eot');
   src: local('Gilroy Bold'), local('Gilroy-Bold'),
     url('@/assets/fonts/gilroy/bold/Gilroy-Bold.eot?#iefix') format('embedded-opentype'),
@@ -97,7 +87,7 @@
 }
 
 .font__gilroy__bold {
-  font-family: var(--font-gilroy-bold);
+  font-family: 'Gilroy-Bold';
 }
 
 /* 
@@ -106,10 +96,12 @@
 
 .font__title {
   font-size: 54px;
+  line-height: 90%;
 }
 
 .font__text {
   font-size: 16px;
+  line-height: 20px;
 }
 
 .font__medium {

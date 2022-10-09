@@ -51,5 +51,38 @@ img {
 
 .container {
   max-width: 1440px;
+  width: 100%;
   padding: 0 47px;
+}
+
+.fullPage {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.calcBlock__header {
+  margin-bottom: 32px;
+}
+
+.calcBlock__body {
+  margin-bottom: 44px;
+}
+
+.calcBlock__body,
+.calcBlock__footer {
+  display: flex;
+  width: 100%;
+}
+
+.calcBlock__body > *,
+.calcBlock__footer > * {
+  flex: 1;
+  margin-right: 32px;
+}
+
+.calcBlock__footer > *:last-child,
+.calcBlock__body > *:last-child {
+  margin-right: 0;
 }
