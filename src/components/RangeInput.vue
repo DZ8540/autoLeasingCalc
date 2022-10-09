@@ -29,7 +29,7 @@ const value: Ref<number> = ref(0)
     </div>
 
     <div class="Input__info">
-      <span class="font__nekst__black font__medium color__gray">{{ value }}</span>
+      <input v-model="value" type="string" class="Input__input font__nekst__black font__medium color__gray">
 
       <div>
         <span v-if="props.costType === 'money'" class="font__nekst__black font__medium color__gray">₽</span>
@@ -47,6 +47,22 @@ const value: Ref<number> = ref(0)
 </template>
 
 <style>
+.Input--disabled {
+  opacity: 0.4;
+}
+
+.Input__info:hover .Input__range::-webkit-slider-runnable-track {
+  height: 1px;
+}
+
+.Input__info:hover .Input__range::-moz-range-track {
+  height: 1px;
+}
+
+.Input__info:hover .Input__range::-ms-track {
+  height: 1px;
+}
+
 .Input__label {
   margin-bottom: 24px;
 }
@@ -55,11 +71,27 @@ const value: Ref<number> = ref(0)
   position: relative;
   display: flex;
   height: 68px;
+  width: 100%;
   align-items: center;
   justify-content: space-between;
   padding: 0 24px;
   background-color: #F3F3F4;
   border-radius: 16px;
+}
+
+.Input__info--active {
+  border: 2px solid #F3F3F4;
+  background: #FFF;
+}
+
+.Input__info--active .Input__range {
+  bottom: -4px;
+}
+
+.Input__input {
+  background-color: transparent;
+  border: none;
+  width: 100%;
 }
 
 .Input__range {

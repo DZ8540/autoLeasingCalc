@@ -18,4 +18,16 @@
   /* padding: 0 92.5px; */
   border-radius: 40px;
 }
+
+.Button:hover {
+  background-color: #111;
+}
+
+.Button:active {
+  background-color: #575757;
+}
+
+.Button:disabled {
+  background: rgba(255, 149, 20, 0.4);
+}
 </style>
