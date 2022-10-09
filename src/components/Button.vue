@@ -10,12 +10,15 @@
 
 <style>
 .Button {
+  --padding: 24px;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
   height: 68px;
+  width: 100%;
   background-color: #FF9514;
-  /* padding: 0 92.5px; */
+  padding: 0 var(--padding);
   border-radius: 40px;
 }
 
@@ -29,5 +32,22 @@
 
 .Button:disabled {
   background: rgba(255, 149, 20, 0.4);
+}
+
+/* 
+  * Breakpoints
+*/
+
+@media (max-width: 800px) {
+  .Button {
+    width: unset;
+  }
+}
+
+@media (max-width: 500px) {
+  .Button {
+    width: 100%;
+    height: 60px;
+  }
 }
 </style>

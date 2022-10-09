@@ -62,11 +62,8 @@ img {
   align-items: center;
 }
 
-.calcBlock__header {
-  margin-bottom: 32px;
-}
-
 .calcBlock__body {
+  margin-top: 32px;
   margin-bottom: 44px;
 }
 
@@ -85,4 +82,89 @@ img {
 .calcBlock__footer > *:last-child,
 .calcBlock__body > *:last-child {
   margin-right: 0;
+}
+
+.calcBlock__footer {
+  align-items: flex-end;
+}
+
+/* 
+  * Breakpoints
+*/
+
+@media (max-width: 800px) {
+  .container {
+    padding: 0 36px;
+  }
+
+  .fullPage {
+    align-items: flex-start;
+    padding-top: 64px;
+  }
+
+  .calcBlock__body {
+    margin-top: 44px;
+    margin-bottom: 37px;
+  }
+
+  .calcBlock__body {
+    flex-direction: column;
+  }
+
+  .calcBlock__body > *,
+  .calcBlock__footer > * {
+    margin-right: 0;
+  }
+
+  .calcBlock__body > * {
+    margin-bottom: 39px;
+  }
+
+  .calcBlock__footer > * {
+    margin-bottom: 44px;
+  }
+
+  .calcBlock__footer > *:last-child,
+  .calcBlock__body > *:last-child {
+    margin-bottom: 0;
+  }
+
+  .calcBlock__footer {
+    flex-wrap: wrap;
+  }
+
+  .calcBlock__footer > * {
+    flex: 2 2 50%;
+  }
+}
+
+@media (max-width: 500px) {
+  .container {
+    padding: 0 20px;
+  }
+
+  .fullPage {
+    height: 100%;
+    padding-top: 44px;
+    padding-bottom: 64px;
+  }
+
+  .calcBlock__body {
+    margin-top: 32px;
+    margin-bottom: 25px;
+  }
+
+  .calcBlock__body > * {
+    margin-bottom: 25px;
+  }
+
+  .calcBlock__footer > * {
+    width: 100%;
+    margin-bottom: 29px;
+  }
+
+  .calcBlock__footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

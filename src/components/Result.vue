@@ -9,7 +9,7 @@
       <slot>Result component</slot>
     </span>
 
-    <span class="color__black font__title font__nekst__black">
+    <span class="Result__cost color__black font__title font__nekst__black">
       <slot name="cost">Result component cost</slot>
     </span>
 
@@ -20,5 +20,19 @@
 .Result__title {
   display: block;
   margin-bottom: 8px;
+}
+
+/* 
+  * Breakpoints
+*/
+
+@media (max-width: 500px) {
+  .Result__title {
+    margin-bottom: 0;
+  }
+
+  .Result__cost {
+    font-size: 22px !important;
+  }
 }
 </style>

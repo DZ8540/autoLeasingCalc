@@ -202,4 +202,23 @@ const value: Ref<number> = ref(0)
 .Input__range:focus::-ms-fill-upper {
   background-color: #FF9514;
 }
+
+/* 
+  * Breakpoints
+*/
+
+@media (max-width: 500px) {
+  .Input__label {
+    margin-bottom: 8px;
+  }
+
+  .Input__info {
+    height: 60px;
+    padding: 0 20px;
+  }
+
+  .Input__percentage {
+    padding: 0 14px;
+  }
+}
 </style>

@@ -20,33 +20,45 @@ import RangeInput from '@/components/RangeInput.vue'
           </div>
 
           <div class="calcBlock__body">
-            <RangeInput name="cost" cost-type="money">
-              Стоимость автомобиля
-            </RangeInput>
+            <div>
+              <RangeInput name="cost" cost-type="money">
+                Стоимость автомобиля
+              </RangeInput>
+            </div>
 
-            <RangeInput name="cost" cost-type="percent">
-              Первоначальный взнос
-            </RangeInput>
+            <div>
+              <RangeInput name="cost" cost-type="percent">
+                Первоначальный взнос
+              </RangeInput>
+            </div>
 
-            <RangeInput name="cost" cost-type="month">
-              Срок лизинга
-            </RangeInput>
+            <div>
+              <RangeInput name="cost" cost-type="month">
+                Срок лизинга
+              </RangeInput>
+            </div>
           </div>
 
           <div class="calcBlock__footer">
-            <Result>
-              Сумма договора лизинга
+            <div>
+              <Result>
+                Сумма договора лизинга
 
-              <template #cost>4 467 313 ₽</template>
-            </Result>
+                <template #cost>4 467 313 ₽</template>
+              </Result>
+            </div>
 
-            <Result>
-              Ежемесячный платеж от
+            <div>
+              <Result>
+                Ежемесячный платеж от
 
-              <template #cost>4 467 313 ₽</template>
-            </Result>
+                <template #cost>4 467 313 ₽</template>
+              </Result>
+            </div>
 
-            <Button>Оставить заявку</Button>
+            <div>
+              <Button>Оставить заявку</Button>
+            </div>
           </div>
         </div>
 
