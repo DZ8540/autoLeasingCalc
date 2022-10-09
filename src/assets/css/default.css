@@ -53,6 +53,7 @@ img {
   max-width: 1440px;
   width: 100%;
   padding: 0 47px;
+  margin: 0 auto;
 }
 
 .fullPage {

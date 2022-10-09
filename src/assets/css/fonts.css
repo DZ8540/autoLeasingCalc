@@ -41,7 +41,7 @@
 @font-face {
   font-family: 'Nekst-Black';
   src: url('@/assets/fonts/nekst/black/Nekst-Black.eot');
-  src: local('Nekst'), local('Nekst-Black'),
+  src: local('Nekst'), local('Nekst-Black'), local('Nekst Black'),
     url('@/assets/fonts/nekst/black/Nekst-Black.eot?#iefix') format('embedded-opentype'),
     url('@/assets/fonts/nekst/black/Nekst-Black.woff2') format('woff2'),
     url('@/assets/fonts/nekst/black/Nekst-Black.woff') format('woff'),
