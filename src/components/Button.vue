@@ -1,10 +1,20 @@
 <script lang="ts" setup>
-// const props = defineProps({})
+import Loader from '@/components/Loader.vue'
+
+const props = defineProps({
+  isLoading: {
+    type: Boolean,
+    default: false,
+  },
+  loaderSize: Number,
+})
 </script>
 
 <template>
-  <button class="Button font__medium font__nekst__black color__white">
-    <slot>Button component</slot>
+  <button class="Button font__medium font__nekst__black color__white" :disabled="props.isLoading">
+    <Loader v-if="props.isLoading" :size="loaderSize" />
+    
+    <slot v-else>Button component</slot>
   </button>
 </template>
 

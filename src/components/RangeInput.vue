@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 // * Types
-import type { PropType, Ref } from 'vue'
+import { formatNumber } from '@/helpers'
+import { nextTick, onMounted, type PropType, type Ref, ref, inject, onUpdated, watch } from 'vue'
 // * Types
 
-import { ref } from 'vue'
-
+const emit = defineEmits<{ (e: 'onCalculatedValue', value: number): void }>()
 const props = defineProps({
   name: {
     type: String,
@@ -14,9 +14,73 @@ const props = defineProps({
     type: String as PropType<'money' | 'percent' | 'month'>,
     required: true,
   },
+  minValue: {
+    type: Number,
+    default: 0,
+  },
+  maxValue: {
+    type: Number,
+    default: 100,
+  },
+  debounceMs: {
+    type: Number,
+    default: 1500,
+  },
 })
 
-const value: Ref<number> = ref(0)
+const value: Ref<number> = ref(props.minValue) // If cost type === 'percent' then that value is percents
+const calculatedInputValue: Ref<number> = ref(inject('calculatedPercentValue', 0))
+  
+const inputElement: Ref<HTMLInputElement | null> = ref(null)
+
+function emitNewValue(): void {
+  emit('onCalculatedValue', Number(value.value))
+}
+
+async function formatValue(): Promise<void> {
+  await nextTick()
+  
+  const valueForFormatting: number = props.costType === 'percent' ? calculatedInputValue.value : value.value
+
+  inputElement.value!.value = formatNumber(valueForFormatting)
+}
+
+function changeValueByRange(): void {
+  emitNewValue()
+  formatValue()
+}
+
+async function removeLetters(e: Event): Promise<void> {
+  const valueWithoutLetters: string = (e.target as HTMLInputElement).value.replace(/\D/g, '')
+
+  if (props.costType !== 'percent')
+    value.value = Number(valueWithoutLetters)
+  else
+    calculatedInputValue.value = Number(valueWithoutLetters)
+
+  formatValue()
+}
+
+async function validateValue(): Promise<void> {
+  if (props.costType !== 'percent') {
+    if (value.value < props.minValue || !value.value)
+      value.value = props.minValue
+
+    if (value.value > props.maxValue)
+      value.value = props.maxValue
+  }
+
+  emitNewValue()
+  formatValue()
+}
+
+watch(calculatedInputValue, () => {
+  formatValue()
+})
+
+onMounted(() => {
+  formatValue()
+})
 </script>
 
 <template>
@@ -29,18 +93,43 @@ const value: Ref<number> = ref(0)
     </div>
 
     <div class="Input__info">
-      <input v-model="value" type="string" class="Input__input font__nekst__black font__medium color__gray">
+      <input
+        v-if="props.costType !== 'percent'"
+        ref="inputElement"
+        v-model="value" 
+        @input="removeLetters" 
+        @focusout="validateValue" 
+        :id="props.name"
+        type="string" 
+        class="Input__input font__nekst__black font__medium color__gray"
+      >
+      <input
+        v-else
+        ref="inputElement"
+        v-model="calculatedInputValue" 
+        @input="removeLetters"
+        :id="props.name"
+        type="string"
+        class="Input__input font__nekst__black font__medium color__gray"
+      >
 
       <div>
         <span v-if="props.costType === 'money'" class="font__nekst__black font__medium color__gray">₽</span>
         <span v-if="props.costType === 'month'" class="font__nekst__black font__medium color__gray">мес.</span>
 
         <div v-if="props.costType === 'percent'" class="Input__percentage">
-          <span class="Input__percentage__text font__nekst__black color__gray">50%</span>
+          <span class="Input__percentage__text font__nekst__black color__gray">{{ value }}%</span>
         </div>
       </div>
 
-      <input v-model="value" :name="props.name" :id="props.name" type="range" class="Input__range">
+      <input 
+        v-model="value" 
+        @input="changeValueByRange"
+        :min="props.minValue" 
+        :max="props.maxValue"
+        type="range" 
+        class="Input__range"
+      >
     </div>
 
   </div>
