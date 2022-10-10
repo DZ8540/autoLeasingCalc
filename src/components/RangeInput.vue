@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 // * Types
-import { formatNumber } from '@/helpers'
-import { nextTick, onMounted, type PropType, type Ref, ref, inject, onUpdated, watch } from 'vue'
+import type { PropType, Ref } from 'vue'
 // * Types
+
+import { formatNumber } from '@/helpers'
+import { nextTick, onMounted, ref, inject, watch } from 'vue'
 
 const emit = defineEmits<{ (e: 'onCalculatedValue', value: number): void }>()
 const props = defineProps({

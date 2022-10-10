@@ -1,14 +1,19 @@
 <script setup lang="ts">
+// * Types
+import type { Ref } from 'vue'
+import type { CalcSendPayload } from './contracts/calc'
+// * Types
+
+// * Components
 import Title from '@/components/Title.vue'
 import Result from '@/components/Result.vue'
 import Button from '@/components/Button.vue'
 import RangeInput from '@/components/RangeInput.vue'
-import { onBeforeMount, provide, type Ref } from 'vue'
-import { formatNumber } from '@/helpers'
-import CalcService from '@/service/CalcService'
+// * Components
 
-import { ref } from 'vue'
-import type { CalcSendPayload } from './contracts/calc'
+import CalcService from '@/service/CalcService'
+import { formatNumber } from '@/helpers'
+import { onBeforeMount, provide, ref } from 'vue'
 
 const PERCENT_RATE: number = 0.035
 

@@ -1,6 +1,9 @@
-import { API_ROUTES } from '@/config/api'
-import type { CalcSendPayload, CalcSendResponse } from '@/contracts/calc'
+// * Types
 import type { AxiosResponse } from 'axios'
+import type { CalcSendPayload, CalcSendResponse } from '@/contracts/calc'
+// * Types
+
+import { API_ROUTES } from '@/config/api'
 import { HTTP_CLIENT } from './httpClient'
 
 export async function calcSendData(payload: CalcSendPayload): Promise<AxiosResponse<CalcSendResponse> | void> {

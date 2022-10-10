@@ -1,4 +1,7 @@
+// * Types
 import type { AxiosInstance } from 'axios'
+// * Types
+
 import axios from 'axios'
 
 export const HTTP_CLIENT: AxiosInstance = axios.create({

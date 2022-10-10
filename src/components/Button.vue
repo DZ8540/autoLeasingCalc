@@ -1,5 +1,7 @@
 <script lang="ts" setup>
+// * Components
 import Loader from '@/components/Loader.vue'
+// * Components
 
 const props = defineProps({
   isLoading: {
