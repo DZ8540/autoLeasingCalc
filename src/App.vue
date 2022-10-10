@@ -17,36 +17,45 @@ import { onBeforeMount, provide, ref } from 'vue'
 
 const PERCENT_RATE: number = 0.035
 
-const COST_MIN_VALUE: number = 1_000_000
-const COST_MAX_VALUE: number = 6_000_000
-const costValue: Ref<number> = ref(COST_MIN_VALUE)
+const COST_MIN: number = 1_000_000
+const COST_MAX: number = 6_000_000
+const cost: Ref<number> = ref(COST_MIN)
 
-const INITIAL_FEE_MIN_VALUE: number = 10
-const INITIAL_FEE_MAX_VALUE: number = 60
-const initialFeeValue: Ref<number> = ref(INITIAL_FEE_MIN_VALUE)
-const calculatedInitialFeeValue: Ref<number> = ref(0)
-provide('calculatedPercentValue', calculatedInitialFeeValue)
+const INITIAL_FEE_MIN: number = 10
+const INITIAL_FEE_MAX: number = 60
+const initialFee: Ref<number> = ref(INITIAL_FEE_MIN)
 
-const LEASING_EXPIRE_MIN_VALUE: number = 1
-const LEASING_EXPIRE_MAX_VALUE: number = 60
-const leasingExpireValue: Ref<number> = ref(LEASING_EXPIRE_MIN_VALUE)
+const calculatedInitialFee: Ref<number> = ref(0)
+provide('calculatedInitialFee', calculatedInitialFee)
+
+const calculatedInitialFeeMin: Ref<number> = ref(0)
+provide('calculatedInitialFeeMin', calculatedInitialFeeMin)
+
+const calculatedInitialFeeMax: Ref<number> = ref(0)
+provide('calculatedInitialFeeMax', calculatedInitialFeeMax)
+
+const LEASING_EXPIRE_MIN: number = 1
+const LEASING_EXPIRE_MAX: number = 60
+const leasingExpire: Ref<number> = ref(LEASING_EXPIRE_MIN)
 
 const sum: Ref<number> = ref(0)
 const everyMonthPrice: Ref<number> = ref(0)
 const isLoading: Ref<boolean> = ref(false)
 
-function calculateInitialFeeValue(): void {
-  calculatedInitialFeeValue.value = Math.floor(costValue.value * (initialFeeValue.value / 100))
+function calculateInitialFee(): void {
+  calculatedInitialFee.value = Math.floor(cost.value * (initialFee.value / 100))
+  calculatedInitialFeeMin.value = Math.floor(cost.value * (INITIAL_FEE_MIN / 100))
+  calculatedInitialFeeMax.value = Math.floor(cost.value * (INITIAL_FEE_MAX / 100))
 }
 
 function calculateSum(): void {
-  sum.value = Math.floor(calculatedInitialFeeValue.value + (leasingExpireValue.value * everyMonthPrice.value))
+  sum.value = Math.floor(calculatedInitialFee.value + (leasingExpire.value * everyMonthPrice.value))
 }
 
 function calculateEveryMonthPrice(): void {
-  const calculatedEveryMonthPrice: number = (costValue.value - calculatedInitialFeeValue.value) *
-    ((PERCENT_RATE * Math.pow((1 + PERCENT_RATE), leasingExpireValue.value)) / 
-    (Math.pow((1 + PERCENT_RATE), leasingExpireValue.value) - 1))
+  const calculatedEveryMonthPrice: number = (cost.value - calculatedInitialFee.value) *
+    ((PERCENT_RATE * Math.pow((1 + PERCENT_RATE), leasingExpire.value)) / 
+    (Math.pow((1 + PERCENT_RATE), leasingExpire.value) - 1))
 
   everyMonthPrice.value = Math.floor(calculatedEveryMonthPrice)
 }
@@ -56,22 +65,22 @@ function calculateAll(): void {
   calculateSum()
 }
 
-function setNewCostValue(newValue: number): void {
-  costValue.value = newValue
+function setCostValue(val: number): void {
+  cost.value = val
 
-  calculateInitialFeeValue()
+  calculateInitialFee()
   calculateAll()
 }
 
-function setNewInitialFeeValue(newValue: number): void {
-  initialFeeValue.value = newValue
+function setInitialFee(val: number): void {
+  initialFee.value = val
 
-  calculateInitialFeeValue()
+  calculateInitialFee()
   calculateAll()
 }
 
-function setNewLeasingExpireValue(newValue: number): void {
-  leasingExpireValue.value = newValue
+function setLeasingExpire(val: number): void {
+  leasingExpire.value = val
 
   calculateAll()
 }
@@ -80,10 +89,10 @@ async function sendPayload(): Promise<void> {
   isLoading.value = true
 
   const payload: CalcSendPayload = {
-    car_coast: costValue.value,
-    initail_payment: calculatedInitialFeeValue.value,
-    initail_payment_percent: initialFeeValue.value,
-    lease_term: leasingExpireValue.value,
+    car_coast: cost.value,
+    initail_payment: calculatedInitialFee.value,
+    initail_payment_percent: initialFee.value,
+    lease_term: leasingExpire.value,
     monthly_payment_from: everyMonthPrice.value,
     total_sum: sum.value,
   }
@@ -93,7 +102,7 @@ async function sendPayload(): Promise<void> {
 }
 
 onBeforeMount(() => {
-  calculateInitialFeeValue()
+  calculateInitialFee()
   calculateAll()
 })
 </script>
@@ -115,9 +124,9 @@ onBeforeMount(() => {
           <div class="calcBlock__body">
             <div>
               <RangeInput 
-                @on-calculated-value="setNewCostValue" 
-                :min-value="COST_MIN_VALUE" 
-                :max-value="COST_MAX_VALUE" 
+                @on-calculated-value="setCostValue" 
+                :min="COST_MIN" 
+                :max="COST_MAX" 
                 name="cost" 
                 cost-type="money"
               >
@@ -127,9 +136,9 @@ onBeforeMount(() => {
 
             <div>
               <RangeInput 
-                @on-calculated-value="setNewInitialFeeValue" 
-                :min-value="INITIAL_FEE_MIN_VALUE" 
-                :max-value="INITIAL_FEE_MAX_VALUE"
+                @on-calculated-value="setInitialFee" 
+                :min="INITIAL_FEE_MIN" 
+                :max="INITIAL_FEE_MAX"
                 name="initialFee" 
                 cost-type="percent"
               >
@@ -139,9 +148,9 @@ onBeforeMount(() => {
 
             <div>
               <RangeInput 
-                @on-calculated-value="setNewLeasingExpireValue"
-                :min-value="LEASING_EXPIRE_MIN_VALUE" 
-                :max-value="LEASING_EXPIRE_MAX_VALUE"
+                @on-calculated-value="setLeasingExpire"
+                :min="LEASING_EXPIRE_MIN" 
+                :max="LEASING_EXPIRE_MAX"
                 name="leasingExpire" 
                 cost-type="month" 
               >

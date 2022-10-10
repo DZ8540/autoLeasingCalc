@@ -4,7 +4,7 @@ import type { PropType, Ref } from 'vue'
 // * Types
 
 import { formatNumber } from '@/helpers'
-import { nextTick, onMounted, ref, inject, watch } from 'vue'
+import { nextTick, onMounted, ref, inject } from 'vue'
 
 const emit = defineEmits<{ (e: 'onCalculatedValue', value: number): void }>()
 const props = defineProps({
@@ -16,11 +16,11 @@ const props = defineProps({
     type: String as PropType<'money' | 'percent' | 'month'>,
     required: true,
   },
-  minValue: {
+  min: {
     type: Number,
     default: 0,
   },
-  maxValue: {
+  max: {
     type: Number,
     default: 100,
   },
@@ -30,16 +30,18 @@ const props = defineProps({
   },
 })
 
-const value: Ref<number> = ref(props.minValue) // If cost type === 'percent' then that value is percents
-const calculatedInputValue: Ref<number> = ref(inject('calculatedPercentValue', 0))
+const value: Ref<number> = ref(props.min) // If cost type === 'percent' then that value is percents
+const calculatedInputValue: Ref<number> = ref(inject('calculatedInitialFee', 0))
+const calculatedInputMinValue: Ref<number> = ref(inject('calculatedInitialFeeMin', 0))
+const calculatedInputMaxValue: Ref<number> = ref(inject('calculatedInitialFeeMax', 0))
   
 const inputElement: Ref<HTMLInputElement | null> = ref(null)
 
 function emitNewValue(): void {
-  emit('onCalculatedValue', Number(value.value))
+  emit('onCalculatedValue', value.value)
 }
 
-async function formatValue(): Promise<void> {
+async function formatInputValue(): Promise<void> {
   await nextTick()
   
   const valueForFormatting: number = props.costType === 'percent' ? calculatedInputValue.value : value.value
@@ -49,7 +51,7 @@ async function formatValue(): Promise<void> {
 
 function changeValueByRange(): void {
   emitNewValue()
-  formatValue()
+  formatInputValue()
 }
 
 async function removeLetters(e: Event): Promise<void> {
@@ -60,28 +62,36 @@ async function removeLetters(e: Event): Promise<void> {
   else
     calculatedInputValue.value = Number(valueWithoutLetters)
 
-  formatValue()
+  formatInputValue()
 }
 
-async function validateValue(): Promise<void> {
+async function validate(): Promise<void> {
   if (props.costType !== 'percent') {
-    if (value.value < props.minValue || !value.value)
-      value.value = props.minValue
+    if (value.value < props.min || !value.value)
+      value.value = props.min
 
-    if (value.value > props.maxValue)
-      value.value = props.maxValue
+    if (value.value > props.max)
+      value.value = props.max
+  } else {
+    if (calculatedInputValue.value < calculatedInputMinValue.value || !calculatedInputValue.value) {
+      calculatedInputValue.value = calculatedInputMinValue.value
+      
+      value.value = props.min
+    }
+
+    if (calculatedInputValue.value > calculatedInputMaxValue.value) {
+      calculatedInputValue.value = calculatedInputMaxValue.value
+
+      value.value = props.max
+    }
   }
 
   emitNewValue()
-  formatValue()
+  formatInputValue()
 }
 
-watch(calculatedInputValue, () => {
-  formatValue()
-})
-
 onMounted(() => {
-  formatValue()
+  formatInputValue()
 })
 </script>
 
@@ -100,7 +110,7 @@ onMounted(() => {
         ref="inputElement"
         v-model="value" 
         @input="removeLetters" 
-        @focusout="validateValue" 
+        @focusout="validate"
         :id="props.name"
         type="string" 
         class="Input__input font__nekst__black font__medium color__gray"
@@ -110,6 +120,7 @@ onMounted(() => {
         ref="inputElement"
         v-model="calculatedInputValue" 
         @input="removeLetters"
+        @focusout="validate"
         :id="props.name"
         type="string"
         class="Input__input font__nekst__black font__medium color__gray"
@@ -127,8 +138,8 @@ onMounted(() => {
       <input 
         v-model="value" 
         @input="changeValueByRange"
-        :min="props.minValue" 
-        :max="props.maxValue"
+        :min="props.min" 
+        :max="props.max"
         type="range" 
         class="Input__range"
       >
@@ -190,6 +201,7 @@ onMounted(() => {
   appearance: none;
   background: transparent;
 
+  height: 2px;
   width: calc(100% - (24px * 2));
   position: absolute;
   bottom: -2px;
@@ -238,6 +250,7 @@ onMounted(() => {
   border-radius: 50%;
   background-color: #FF9514;
   cursor: pointer;
+  border: none;
 }
 
 .Input__range::-ms-thumb {
