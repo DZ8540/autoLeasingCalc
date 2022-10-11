@@ -23,6 +23,7 @@ node_modules
 
 # * Files
 
+.env
 *.suo
 *.sln
 *.sw?
